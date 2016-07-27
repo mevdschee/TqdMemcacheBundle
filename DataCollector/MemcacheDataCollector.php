@@ -1,12 +1,12 @@
 <?php
-namespace Lsw\MemcacheBundle\DataCollector;
+namespace Tqd\MemcacheBundle\DataCollector;
 
 use Symfony\Component\Yaml\Yaml;
 
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Lsw\MemcacheBundle\Cache\LoggingMemcacheInterface;
+use Tqd\MemcacheBundle\Cache\LoggingMemcacheInterface;
 
 
 /**

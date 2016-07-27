@@ -1,9 +1,9 @@
 <?php
 
-namespace Lsw\MemcacheBundle\Tests\Cache;
+namespace Tqd\MemcacheBundle\Tests\Cache;
 
 
-use Lsw\MemcacheBundle\Cache\LoggingMemcache;
+use Tqd\MemcacheBundle\Cache\LoggingMemcache;
 
 /**
  * Testing the LoggingMemcache Class.
@@ -17,8 +17,8 @@ class LoggingMemcacheTest extends \PHPUnit_Framework_TestCase
         $cache = new LoggingMemcache('foo',array());
 
         $this->assertInstanceOf('\MemcachePool', $cache);
-        $this->assertInstanceOf('\Lsw\MemcacheBundle\Cache\MemcacheInterface', $cache);
-        $this->assertInstanceOf('\Lsw\MemcacheBundle\Cache\LoggingMemcacheInterface', $cache);
+        $this->assertInstanceOf('\Tqd\MemcacheBundle\Cache\MemcacheInterface', $cache);
+        $this->assertInstanceOf('\Tqd\MemcacheBundle\Cache\LoggingMemcacheInterface', $cache);
     }
 
     public function testOpenPort()

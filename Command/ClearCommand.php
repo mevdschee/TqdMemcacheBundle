@@ -1,8 +1,8 @@
 <?php
 
-namespace Lsw\MemcacheBundle\Command;
+namespace Tqd\MemcacheBundle\Command;
 
-use Lsw\MemcacheBundle\Cache\AntiDogPileMemcache;
+use Tqd\MemcacheBundle\Cache\AntiDogPileMemcache;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;

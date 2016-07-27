@@ -1,5 +1,5 @@
 <?php
-namespace Lsw\MemcacheBundle\Firewall;
+namespace Tqd\MemcacheBundle\Firewall;
 
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

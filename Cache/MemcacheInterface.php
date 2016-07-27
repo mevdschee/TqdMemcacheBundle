@@ -1,5 +1,5 @@
 <?php
-namespace Lsw\MemcacheBundle\Cache;
+namespace Tqd\MemcacheBundle\Cache;
 
 interface MemcacheInterface {
     public function setFailureCallback($failureCallback);

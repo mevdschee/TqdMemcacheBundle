@@ -1,18 +1,18 @@
 <?php
 
-namespace Lsw\MemcacheBundle;
+namespace Tqd\MemcacheBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Lsw\MemcacheBundle\DependencyInjection\LswMemcacheExtension;
+use Tqd\MemcacheBundle\DependencyInjection\TqdMemcacheExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Lsw\MemcacheBundle\DependencyInjection\Compiler\EnableSessionSupport;
+use Tqd\MemcacheBundle\DependencyInjection\Compiler\EnableSessionSupport;
 
 /**
 * Bundle for Memcache sessions and cache with debug toolbar integration
 *
 * @author Maurits van der Schee <m.vanderschee@leaseweb.com>
 */
-class LswMemcacheBundle extends Bundle
+class TqdMemcacheBundle extends Bundle
 {
     /**
      * {@inheritDoc}

@@ -1,6 +1,6 @@
 parameters:
-    memcache.data_collector.class: Lsw\MemcacheBundle\DataCollector\MemcacheDataCollector
-    memcache.data_collector.template: "LswMemcacheBundle:Collector:memcache"
+    memcache.data_collector.class: Tqd\MemcacheBundle\DataCollector\MemcacheDataCollector
+    memcache.data_collector.template: "TqdMemcacheBundle:Collector:memcache"
 
 services:
     memcache.data_collector:

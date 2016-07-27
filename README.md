@@ -1,9 +1,9 @@
-[![Build Status](https://travis-ci.org/LeaseWeb/LswMemcacheBundle.svg)](https://travis-ci.org/LeaseWeb/LswMemcacheBundle)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/LeaseWeb/LswMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/LswMemcacheBundle "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/LeaseWeb/LswMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/LswMemcacheBundle "Percentage of issues still open")
+[![Build Status](https://travis-ci.org/LeaseWeb/TqdMemcacheBundle.svg)](https://travis-ci.org/LeaseWeb/TqdMemcacheBundle)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/LeaseWeb/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/TqdMemcacheBundle "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/LeaseWeb/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/TqdMemcacheBundle "Percentage of issues still open")
 [![Total Downloads](https://img.shields.io/packagist/dt/leaseweb/memcache-bundle.svg?style=flat-square)](https://packagist.org/packages/leaseweb/memcache-bundle)
 
-LswMemcacheBundle
+TqdMemcacheBundle
 =================
 
 ![screenshot](http://www.leaseweblabs.com/wp-content/uploads/2015/06/memcache_v2.png)
@@ -16,7 +16,7 @@ caching support or expensive API calls by implementing the caching using Memcach
 This Symfony bundle will provide Memcache integration into Symfony and Doctrine for session storage and caching. 
 It has full Web Debug Toolbar integration that allows you to analyze and debug the cache behavior and performance.
 
-[Read the LeaseWebLabs blog about LswMemcacheBundle](http://www.leaseweblabs.com/2015/06/version-2-of-our-memcache-bundle-for-symfony-is-released/)
+[Read the LeaseWebLabs blog about TqdMemcacheBundle](http://www.leaseweblabs.com/2015/06/version-2-of-our-memcache-bundle-for-symfony-is-released/)
 
 ### Requirements
 
@@ -30,7 +30,7 @@ PHP7 support is currently (experimentally) available by compiling and installing
 
 ### Installation
 
-To install LswMemcacheBundle with Composer just add the following to your 'composer.json' file:
+To install TqdMemcacheBundle with Composer just add the following to your 'composer.json' file:
 
     {
         require: {
@@ -49,7 +49,7 @@ Finally, add the bundle to the registerBundles function of the AppKernel class i
     {
         $bundles = array(
             ...
-            new Lsw\MemcacheBundle\LswMemcacheBundle(),
+            new Tqd\MemcacheBundle\TqdMemcacheBundle(),
             ...
         );
 
@@ -185,7 +185,7 @@ Your cache is stored for 90 minutes. It takes about 3 second to calculate the ca
 
 The heavy forking will cause extra CPU usage and the each worker will use extra RAM. This unexpected increase in RAM and CPU is called the 'dog pile' effect or 'stampeding herd' or 'thundering herd' and is very unwelcome during peak hours on a web service.
 
-There is a solution: we serve the old cache entries while calculating the new value and by using an atomic read and write operation we can make sure only one thread will receive a cache miss when the content is invalidated. The algorithm is implemented in AntiDogPileMemcache class in LswMemcacheBundle. It provides the getAdp(), setAdp() and deleteAdp() functions that can be used as replacements for the normal get, set and delete.
+There is a solution: we serve the old cache entries while calculating the new value and by using an atomic read and write operation we can make sure only one thread will receive a cache miss when the content is invalidated. The algorithm is implemented in AntiDogPileMemcache class in TqdMemcacheBundle. It provides the getAdp(), setAdp() and deleteAdp() functions that can be used as replacements for the normal get, set and delete.
 
 Please note:
 
@@ -197,7 +197,7 @@ Please note:
 
 ### Considerations
 
-LswMemcacheBundle uses the 'memcache' PHP extension (memcached client) and not the libmemcache based 'memcached' PHP extension.
+TqdMemcacheBundle uses the 'memcache' PHP extension (memcached client) and not the libmemcache based 'memcached' PHP extension.
 
 Major version 1 of this bundle used the other extension. In major version 2 of this bundle the full featured version 3.0.8 of PECL "memcache" (without the 'd') was chosen, due to it's complete feature set and good design and support.
 
@@ -214,7 +214,7 @@ Doctrine support is based on the implementation in SncRedisBundle:
 
 https://github.com/snc/SncRedisBundle by Henrik Westphal
 
-- DependencyInjection/LswMemcacheExtension.php
+- DependencyInjection/TqdMemcacheExtension.php
 - DependencyInjection/Configuration.php
 - DependencyInjection/Compiler/EnableSessionSupport.php
 

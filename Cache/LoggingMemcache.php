@@ -1,5 +1,5 @@
 <?php
-namespace Lsw\MemcacheBundle\Cache;
+namespace Tqd\MemcacheBundle\Cache;
 
 class LoggingMemcache extends \MemcachePool implements MemcacheInterface, LoggingMemcacheInterface {
     public function __construct($logging) {

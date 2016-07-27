@@ -1,5 +1,5 @@
 <?php
-namespace Lsw\MemcacheBundle\Doctrine\Cache;
+namespace Tqd\MemcacheBundle\Doctrine\Cache;
 
 use \MemcachePool;
 

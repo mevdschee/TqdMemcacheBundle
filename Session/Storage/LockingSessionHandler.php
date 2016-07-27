@@ -1,5 +1,5 @@
 <?php
-namespace Lsw\MemcacheBundle\Session\Storage;
+namespace Tqd\MemcacheBundle\Session\Storage;
 
 /**
  * LockingSessionHandler.

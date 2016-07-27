@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Lsw\MemcacheBundle\Command;
+namespace Tqd\MemcacheBundle\Command;
 
 
 use Symfony\Component\Console\Command\Command;

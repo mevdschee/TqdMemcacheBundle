@@ -1,6 +1,6 @@
 <?php
 
-namespace Lsw\MemcacheBundle\Tests\Cache;
+namespace Tqd\MemcacheBundle\Tests\Cache;
 
 /**
  * Testing the MemcacheInterface Switch.
@@ -11,7 +11,7 @@ class MemcacheInterfaceTest extends \PHPUnit_Framework_TestCase
 {
     public function testInterfaceWorks()
     {
-        $class = new \ReflectionClass('\Lsw\MemcacheBundle\Cache\MemcacheInterface');
+        $class = new \ReflectionClass('\Tqd\MemcacheBundle\Cache\MemcacheInterface');
 
         $methods = array_map(
             function (\ReflectionMethod $method) {

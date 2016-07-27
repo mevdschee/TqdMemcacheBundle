@@ -1,6 +1,6 @@
 <?php
 
-namespace Lsw\MemcacheBundle\DependencyInjection;
+namespace Tqd\MemcacheBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -15,7 +15,7 @@ use Symfony\Component\DependencyInjection\Definition;
  * Applies the configuration for the Memcache object
  * Based on Emagister\MemcachedBundle by Christian Soronellas
  */
-class LswMemcacheExtension extends Extension
+class TqdMemcacheExtension extends Extension
 {
     /**
      * {@inheritDoc}
@@ -193,7 +193,7 @@ class LswMemcacheExtension extends Extension
             throw new \LogicException('Memcache extension is not loaded! To configure pools it MUST be loaded!');
         }
 
-        $memcache = new Definition('Lsw\MemcacheBundle\Cache\AntiDogPileMemcache');
+        $memcache = new Definition('Tqd\MemcacheBundle\Cache\AntiDogPileMemcache');
         $memcache->addArgument(new Parameter('kernel.debug'));
 
         // Add servers to the memcache pool

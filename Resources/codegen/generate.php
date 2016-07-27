@@ -2,7 +2,7 @@
 $dirs = array_filter(scandir('.'),function($f){ return preg_match('/^memcache-/', $f);});
 foreach (array(true,false) as $interface) {
   ob_start();
-  echo "<?php\nnamespace Lsw\MemcacheBundle\Cache;\n\n\$extension = new \\ReflectionExtension('memcache');\n";
+  echo "<?php\nnamespace Tqd\MemcacheBundle\Cache;\n\n\$extension = new \\ReflectionExtension('memcache');\n";
   foreach ($dirs as $dir) {
     if (!preg_match('/^memcache-(.*)$/', $dir, $matches)) continue;
     $version = $matches[1];
@@ -69,7 +69,7 @@ END_OF_PHP;
     echo "    }\n";
     echo "} else ";
   }
-  echo "{\n    throw new \\Exception('LswMemcacheBundle does not support version '.\$extension->getVersion().' of the memcache extension.');\n}\n";
+  echo "{\n    throw new \\Exception('TqdMemcacheBundle does not support version '.\$extension->getVersion().' of the memcache extension.');\n}\n";
   if ($interface) file_put_contents('../../Cache/MemcacheInterface.php',ob_get_clean());
   else file_put_contents('../../Cache/LoggingMemcache.php',ob_get_clean());
 }

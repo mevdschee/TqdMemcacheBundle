@@ -1,6 +1,6 @@
 <?php
 
-namespace Lsw\MemcacheBundle\Command;
+namespace Tqd\MemcacheBundle\Command;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;

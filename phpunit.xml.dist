@@ -14,7 +14,7 @@
 >
 
     <testsuites>
-        <testsuite name="LswMemcacheBundleTest Suite">
+        <testsuite name="TqdMemcacheBundleTest Suite">
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>

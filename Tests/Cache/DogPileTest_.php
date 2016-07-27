@@ -1,7 +1,7 @@
 <?php
-namespace Lsw\MemcacheBundle\Tests\Cache;
+namespace Tqd\MemcacheBundle\Tests\Cache;
 
-use Lsw\MemcacheBundle\Cache\AntiDogPileMemcache;
+use Tqd\MemcacheBundle\Cache\AntiDogPileMemcache;
 
 require_once "../../Cache/LoggingMemcacheInterface.php";
 require_once "../../Cache/MemcacheInterface.php";

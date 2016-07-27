@@ -1,5 +1,5 @@
 <?php
-namespace Lsw\MemcacheBundle\Cache;
+namespace Tqd\MemcacheBundle\Cache;
 
 /**
  * Interface to allow for DataCollector to retrieve logged calls

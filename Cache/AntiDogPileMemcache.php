@@ -1,5 +1,5 @@
 <?php
-namespace Lsw\MemcacheBundle\Cache;
+namespace Tqd\MemcacheBundle\Cache;
 
 /**
  * Class to encapsulate PHP Memcache object to avoid the "Dog Pile" effect
