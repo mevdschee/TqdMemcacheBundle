@@ -1,6 +1,6 @@
-[![Build Status](https://travis-ci.org/LeaseWeb/TqdMemcacheBundle.svg)](https://travis-ci.org/LeaseWeb/TqdMemcacheBundle)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/LeaseWeb/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/TqdMemcacheBundle "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/LeaseWeb/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/TqdMemcacheBundle "Percentage of issues still open")
+[![Build Status](https://travis-ci.org/LeaseWeb/TqdMemcacheBundle.svg)](https://travis-ci.org/mevdschee/TqdMemcacheBundle)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/TqdMemcacheBundle "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/TqdMemcacheBundle "Percentage of issues still open")
 [![Total Downloads](https://img.shields.io/packagist/dt/leaseweb/memcache-bundle.svg?style=flat-square)](https://packagist.org/packages/leaseweb/memcache-bundle)
 
 TqdMemcacheBundle
