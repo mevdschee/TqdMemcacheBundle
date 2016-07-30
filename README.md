@@ -16,7 +16,7 @@ caching support or expensive API calls by implementing the caching using Memcach
 This Symfony bundle will provide Memcache integration into Symfony and Doctrine for session storage and caching. 
 It has full Web Debug Toolbar integration that allows you to analyze and debug the cache behavior and performance.
 
-[Read the LeaseWebLabs blog about TqdMemcacheBundle](http://www.leaseweblabs.com/2015/06/version-2-of-our-memcache-bundle-for-symfony-is-released/)
+[Read the TQdev.com blog about TqdMemcacheBundle](http://tqdev.com/2016-symfony-memcache-bundle-v3-released)
 
 ### Requirements
 
