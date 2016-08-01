@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/LeaseWeb/TqdMemcacheBundle.svg)](https://travis-ci.org/mevdschee/TqdMemcacheBundle)
-[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/TqdMemcacheBundle "Average time to resolve an issue")
-[![Percentage of issues still open](http://isitmaintained.com/badge/open/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/LeaseWeb/TqdMemcacheBundle "Percentage of issues still open")
-[![Total Downloads](https://img.shields.io/packagist/dt/leaseweb/memcache-bundle.svg?style=flat-square)](https://packagist.org/packages/leaseweb/memcache-bundle)
+[![Build Status](https://travis-ci.org/mevdschee/TqdMemcacheBundle.svg)](https://travis-ci.org/mevdschee/TqdMemcacheBundle)
+[![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/mevdschee/TqdMemcacheBundle "Average time to resolve an issue")
+[![Percentage of issues still open](http://isitmaintained.com/badge/open/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/mevdschee/TqdMemcacheBundle "Percentage of issues still open")
+[![Total Downloads](https://img.shields.io/packagist/dt/mevdschee/memcache-bundle.svg?style=flat-square)](https://packagist.org/packages/mevdschee/memcache-bundle)
 
 TqdMemcacheBundle
 =================
@@ -34,14 +34,14 @@ To install TqdMemcacheBundle with Composer just add the following to your 'compo
 
     {
         require: {
-            "leaseweb/memcache-bundle": "*",
+            "tqdev/memcache-bundle": "*",
             ...
         }
     }
 
 The next thing you should do is install the bundle by executing the following command:
 
-    php composer.phar update leaseweb/memcache-bundle
+    php composer.phar update tqdev/memcache-bundle
 
 Finally, add the bundle to the registerBundles function of the AppKernel class in the 'app/AppKernel.php' file:
 
