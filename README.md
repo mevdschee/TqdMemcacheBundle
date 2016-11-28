@@ -6,7 +6,7 @@
 TqdMemcacheBundle
 =================
 
-![screenshot](http://www.leaseweblabs.com/wp-content/uploads/2015/06/memcache_v2.png)
+![screenshot](https://raw.githubusercontent.com/mevdschee/TqdMemcacheBundle/master/screenshot.png)
 
 If you want to optimize your web application for high load and/or low load times Memcache is an indispensable tool.
 It will manage your session data without doing disk I/O on web or database servers. You can also run it as a
