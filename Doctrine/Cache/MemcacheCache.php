@@ -75,7 +75,7 @@ class MemcacheCache extends CacheProvider
      */
     protected function doContains($id)
     {
-        return (bool) $this->memcache->get($this->prefix.$id);
+        return $this->memcache->get($this->prefix.$id)!==false;
     }
 
     /**
