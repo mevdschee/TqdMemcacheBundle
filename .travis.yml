@@ -2,17 +2,14 @@ language: php
 
 php:
    - 5.6
+   - hhvm
 
 services:
    - memcached
 
 before_script:
    - phpenv config-rm xdebug.ini
-   - pecl install memcache
-   - phpenv config-add .travis-php.ini
-   - composer self-update || true
-   # Ensure the memcache extension is available
-   - composer show --platform ext-memcache
+   - composer self-update
    - composer install --no-interaction
 
 script:
