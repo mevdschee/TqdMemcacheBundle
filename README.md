@@ -56,9 +56,7 @@ Install the following dependencies (in Ubuntu based systems using 'apt'):
 
     apt-get install memcached php-memcache
 
-Before PHP7 this package may have been called:
-
-    apt-get install memcached php5-memcache
+NB: Before PHP7 this last package may have been called `php5-memcache`.
 
 Do not forget to restart you web server after adding the Memcache module. Now the Memcache
 information should show up with a little double arrow (fast-forward) icon in your debug toolbar.
