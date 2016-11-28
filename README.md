@@ -24,10 +24,6 @@ It has full Web Debug Toolbar integration that allows you to analyze and debug t
 - php-memcache 3.0.6 or higher
 - memcached 1.4 or higher  
 
-NB: This bundle no longer uses the PHP "memcached" extension that uses "libmemcached", see "Considerations". 
-
-PHP7 support is currently (experimentally) available by compiling and installing: https://github.com/websupport-sk/pecl-memcache/tree/php7
-
 ### Installation
 
 To install TqdMemcacheBundle with Composer just add the following to your 'composer.json' file:
@@ -67,7 +63,7 @@ tqd_memcache:
 
 Install the following dependencies (in Debian based systems using 'apt'):
 
-    apt-get install memcached php5-memcache
+    apt-get install memcached php-memcache
 
 Do not forget to restart you web server after adding the Memcache module. Now the Memcache
 information should show up with a little double arrow (fast-forward) icon in your debug toolbar.
@@ -110,7 +106,6 @@ tqd_memcache:
         sessions:
             servers:
                 - { host: localhost, tcp_port: 11212 }
-
 ```
 
 ### Session Support ###
