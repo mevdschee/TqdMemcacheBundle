@@ -52,9 +52,13 @@ tqd_memcache:
               - { host: localhost, tcp_port: 11211 }
 ```
 
-Install the following dependencies (in Debian based systems using 'apt'):
+Install the following dependencies (in Ubuntu based systems using 'apt'):
 
     apt-get install memcached php-memcache
+
+Before PHP7 this package may have been called:
+
+    apt-get install memcached php5-memcache
 
 Do not forget to restart you web server after adding the Memcache module. Now the Memcache
 information should show up with a little double arrow (fast-forward) icon in your debug toolbar.
