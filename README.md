@@ -181,12 +181,6 @@ Please note:
 - ADP's "getAdp", "setAdp" and "deleteAdp" are more expensive than the normal "get", "set" and "delete", slowing down all cache hits.
 - ADP does not guarantee that the dog pile will not occur. Restarting Memcache, flushing data or not enough RAM will also get keys evicted and you will run into the problem anyway.
 
-### Considerations
-
-TqdMemcacheBundle uses the 'memcache' PHP extension (memcached client) and not the libmemcache based 'memcached' PHP extension.
-
-Major version 1 of this bundle used the other extension. In major version 2 of this bundle the full featured version 3.0.8 of PECL "memcache" (without the 'd') was chosen, due to it's complete feature set and good design and support.
-
 ### Known issues
 
 The session write that invokes a memcache set operation is executed after the page has been rendered.
