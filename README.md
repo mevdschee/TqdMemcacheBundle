@@ -26,18 +26,9 @@ It has full Web Debug Toolbar integration that allows you to analyze and debug t
 
 ### Installation
 
-To install TqdMemcacheBundle with Composer just add the following to your 'composer.json' file:
+To install TqdMemcacheBundle with Composer just run the following command:
 
-    {
-        require: {
-            "tqdev/memcache-bundle": "*",
-            ...
-        }
-    }
-
-The next thing you should do is install the bundle by executing the following command:
-
-    php composer.phar update tqdev/memcache-bundle
+    php composer.phar require tqdev/memcache-bundle
 
 Finally, add the bundle to the registerBundles function of the AppKernel class in the 'app/AppKernel.php' file:
 
