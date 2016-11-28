@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('lsw_memcache');
+        $rootNode = $treeBuilder->root('tqd_memcache');
         $rootNode
             ->append($this->addSessionSupportSection())
             ->append($this->addDoctrineSection())
@@ -33,7 +33,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Configure the "lsw_memcache.pools" section
+     * Configure the "tqd_memcache.pools" section
      *
      * @return ArrayNodeDefinition
      */
@@ -105,7 +105,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Configure the "lsw_memcache.session" section
+     * Configure the "tqd_memcache.session" section
      *
      * @return ArrayNodeDefinition
      */
@@ -144,7 +144,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Configure the "lsw_memcache.doctrine" section
+     * Configure the "tqd_memcache.doctrine" section
      *
      * @return ArrayNodeDefinition
      */
@@ -185,7 +185,7 @@ class Configuration implements ConfigurationInterface
     }
     
     /**
-     * Configure the "lsw_memcache.firewall" section
+     * Configure the "tqd_memcache.firewall" section
      *
      * @return ArrayNodeDefinition
      */
@@ -231,7 +231,7 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Configure the "lsw_memcache.options" section
+     * Configure the "tqd_memcache.options" section
      *
      * @return ArrayNodeDefinition
      */

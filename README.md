@@ -56,7 +56,7 @@ Finally, add the bundle to the registerBundles function of the AppKernel class i
 Configure the bundle by adding the following to app/config/config.yml':
 
 ```yml
-lsw_memcache:
+tqd_memcache:
     session:
         pool: default
     pools:
@@ -89,7 +89,7 @@ the value 'false'.
 Below you can see an example configuration for this bundle.
 
 ```yml
-lsw_memcache:
+tqd_memcache:
     pools:
         default:
             servers:
@@ -121,7 +121,7 @@ required subkey of the session support is ```pool``` (a valid pool). You can als
 and a ```ttl```.
 
 ```yml
-lsw_memcache:
+tqd_memcache:
     session:
         pool: sessions
         auto_load: true
@@ -142,7 +142,7 @@ Doctrine caching: 'metadata', 'result' and 'query'. The required keys within tho
 ```pool``` (a valid pool) and ```entity_manager``` (normally: default). You can also specify a ```prefix```.
 
 ```yml
-lsw_memcache:
+tqd_memcache:
     doctrine:
         metadata_cache:
             pool: default
@@ -168,7 +168,7 @@ and a ```concurrency``` (default is 10). If you use one or more reverse proxies,
 ```reverse_proxies``` key.
 
 ```yml
-lsw_memcache:
+tqd_memcache:
     firewall:
         pool: firewall
         prefix: "firewall_"
