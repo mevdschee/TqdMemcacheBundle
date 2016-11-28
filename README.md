@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/mevdschee/TqdMemcacheBundle.svg)](https://travis-ci.org/mevdschee/TqdMemcacheBundle)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/mevdschee/TqdMemcacheBundle "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/mevdschee/TqdMemcacheBundle "Percentage of issues still open")
-[![Total Downloads](https://img.shields.io/packagist/dt/mevdschee/memcache-bundle.svg?style=flat-square)](https://packagist.org/packages/mevdschee/memcache-bundle)
+[![Total Downloads](https://img.shields.io/packagist/dt/tqdev/memcache-bundle.svg?style=flat-square)](https://packagist.org/packages/mevdschee/memcache-bundle)
 
 TqdMemcacheBundle
 =================
