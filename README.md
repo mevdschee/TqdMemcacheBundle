@@ -20,9 +20,9 @@ It has full Web Debug Toolbar integration that allows you to analyze and debug t
 
 ### Requirements
 
-- PHP 5.3.10 or higher
+- PHP 5.3.10 or higher (PHP 7 supported)
 - php-memcache 3.0.6 or higher
-- memcached 1.4 or higher  
+- memcached 1.4 or higher
 
 ### Installation
 
@@ -52,11 +52,11 @@ tqd_memcache:
               - { host: localhost, tcp_port: 11211 }
 ```
 
-Install the following dependencies (in Ubuntu based systems using 'apt'):
+Install the following dependencies (on Ubuntu based systems using 'apt-get'):
 
     apt-get install memcached php-memcache
 
-NB: Before PHP7 this last package may have been called `php5-memcache`.
+NB: In PHP5 this last package was called `php5-memcache`.
 
 Do not forget to restart you web server after adding the Memcache module. Now the Memcache
 information should show up with a little double arrow (fast-forward) icon in your debug toolbar.
