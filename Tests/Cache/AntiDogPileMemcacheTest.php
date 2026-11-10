@@ -10,7 +10,7 @@ use Tqd\MemcacheBundle\Cache\AntiDogPileMemcache;
  *
  * @author Julius Beckmann <github@h4cc.de>
  */
-class AntiDogPileMemcacheTest extends \PHPUnit_Framework_TestCase
+class AntiDogPileMemcacheTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructAndInterfaces()
     {

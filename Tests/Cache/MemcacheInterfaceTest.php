@@ -7,7 +7,7 @@ namespace Tqd\MemcacheBundle\Tests\Cache;
  *
  * @author Julius Beckmann <github@h4cc.de>
  */
-class MemcacheInterfaceTest extends \PHPUnit_Framework_TestCase
+class MemcacheInterfaceTest extends \PHPUnit\Framework\TestCase
 {
     public function testInterfaceWorks()
     {

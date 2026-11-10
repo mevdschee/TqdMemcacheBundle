@@ -10,7 +10,7 @@ use Tqd\MemcacheBundle\Cache\LoggingMemcache;
  *
  * @author Julius Beckmann <github@h4cc.de>
  */
-class LoggingMemcacheTest extends \PHPUnit_Framework_TestCase
+class LoggingMemcacheTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstructAndInterfaces()
     {

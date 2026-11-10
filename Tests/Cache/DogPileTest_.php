@@ -8,7 +8,7 @@ require_once "../../Cache/MemcacheInterface.php";
 require_once "../../Cache/LoggingMemcache.php";
 require_once "../../Cache/AntiDogPileMemcache.php";
 
-class DogPileTest //extends \PHPUnit_Framework_TestCase
+class DogPileTest //extends \PHPUnit\Framework\TestCase
 {
     public function testDogPile()
     {
