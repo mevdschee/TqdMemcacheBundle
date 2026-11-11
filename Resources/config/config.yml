@@ -1,4 +1,0 @@
-parameters:
-    memcache.doctrine_cache.class: Tqd\MemcacheBundle\Doctrine\Cache\MemcacheCache
-    memcache.session_handler.class: Tqd\MemcacheBundle\Session\Storage\LockingSessionHandler
-    memcache.firewall_handler.class: Tqd\MemcacheBundle\Firewall\FirewallHandler

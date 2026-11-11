@@ -86,7 +86,7 @@ class MemcacheCache extends CacheProvider
         if ($lifeTime > 30 * 24 * 3600) {
             $lifeTime = time() + $lifeTime;
         }
-        return $this->memcache->set($this->prefix.$id, $data, null, (int) $lifeTime);
+        return $this->memcache->set($this->prefix.$id, $data, 0, (int) $lifeTime);
     }
 
     /**
@@ -116,7 +116,7 @@ class MemcacheCache extends CacheProvider
             Cache::STATS_MISSES => $stats['get_misses'],
             Cache::STATS_UPTIME => $stats['uptime'],
             Cache::STATS_MEMORY_USAGE       => $stats['bytes'],
-            Cache::STATS_MEMORY_AVAILIABLE  => $stats['limit_maxbytes'],
+            Cache::STATS_MEMORY_AVAILABLE   => $stats['limit_maxbytes'],
         );
     }
 }

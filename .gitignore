@@ -4,3 +4,4 @@ phpunit.xml
 
 .idea/
 
+.phpunit.result.cache

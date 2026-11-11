@@ -100,7 +100,7 @@ class LockingSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritDoc}
      */
-    public function open($savePath, $sessionName)
+    public function open(string $savePath, string $sessionName): bool
     {
         return true;
     }
@@ -111,7 +111,7 @@ class LockingSessionHandler implements \SessionHandlerInterface
 
         $this->lockKey = $sessionId.'.lock';
         for ($i=0;$i<$attempts;$i++) {
-            $success = $this->memcache->add($this->prefix.$this->lockKey, '1', null, $this->lockMaxWait+1);
+            $success = $this->memcache->add($this->prefix.$this->lockKey, '1', 0, (int) $this->lockMaxWait+1);
             if ($success) {
                 $this->locked = true;
                 return true;
@@ -131,7 +131,7 @@ class LockingSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritDoc}
      */
-    public function close()
+    public function close(): bool
     {
         if ($this->locking) {
             if ($this->locked) {
@@ -144,7 +144,7 @@ class LockingSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritDoc}
      */
-    public function read($sessionId)
+    public function read(string $sessionId): string|false
     {
         if ($this->locking) {
             if (!$this->locked) {
@@ -160,7 +160,7 @@ class LockingSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritDoc}
      */
-    public function write($sessionId, $data)
+    public function write(string $sessionId, string $data): bool
     {
         if ($this->locking) {
             if (!$this->locked) {
@@ -170,13 +170,13 @@ class LockingSessionHandler implements \SessionHandlerInterface
             }
         }
         
-        return $this->memcache->set($this->prefix.$sessionId, $data, null, $this->ttl);
+        return $this->memcache->set($this->prefix.$sessionId, $data, 0, $this->ttl);
     }
 
     /**
      * {@inheritDoc}
      */
-    public function destroy($sessionId)
+    public function destroy(string $sessionId): bool
     {
         $this->memcache->delete($this->prefix.$sessionId);
         $this->close();
@@ -186,10 +186,10 @@ class LockingSessionHandler implements \SessionHandlerInterface
     /**
      * {@inheritDoc}
      */
-    public function gc($lifetime)
+    public function gc(int $lifetime): int|false
     {
         // not required here because memcache will auto expire the records anyhow.
-        return true;
+        return 0;
     }
 
     /**

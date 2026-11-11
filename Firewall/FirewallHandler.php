@@ -1,9 +1,10 @@
 <?php
 namespace Tqd\MemcacheBundle\Firewall;
 
-use Symfony\Component\HttpKernel\HttpKernelInterface;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+use Symfony\Component\HttpFoundation\IpUtils;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\Event\TerminateEvent;
 use Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException;
 
 /**
@@ -100,30 +101,22 @@ class FirewallHandler
 	/**
 	 * If the current concurrency is too high, delay or throw a TooManyRequestsHttpException
 	 *
-	 * @param \Symfony\Component\HttpKernel\Event\GetResponseEvent $event Event
+	 * @param RequestEvent $event Event
 	 *
 	 * @throws \Symfony\Component\HttpKernel\Exception\TooManyRequestsHttpException
 	 */
-	public function onKernelRequest(GetResponseEvent $event)
+	public function onKernelRequest(RequestEvent $event)
 	{
-		if (!$event->isMasterRequest()) {
+		if (!$event->isMainRequest()) {
 			return;
 		}
 		
-		$request = $event->getRequest();
-		if ($this->reverseProxies) {
-			$request->setTrustedProxies($this->reverseProxies);
-		}
-		if ($this->xForwardedFor) {
-			$request->setTrustedHeaderName(Request::HEADER_CLIENT_IP, $this->xForwardedFor);
-		}
-		
-		$ip = $request->getClientIp();
+		$ip = $this->getClientIp($event->getRequest());
 		$start = microtime(true);
 
 		$this->key=$this->prefix.'_'.$ip;
 		
-		$this->memcache->add($this->key,0,false,$this->lockMaxWait);
+		$this->memcache->add($this->key,0,0,(int) $this->lockMaxWait);
 		while (true) {
 			$this->incremented = true;
 			if ($this->memcache->increment($this->key)<=$this->concurrency) {
@@ -141,10 +134,10 @@ class FirewallHandler
 	/**
 	 * If the current request has ended, decrement concurrency counter
 	 *
-	 * @param \Symfony\Component\HttpKernel\Event\PostResponseEvent $event Event
+	 * @param TerminateEvent $event Event
 	 *
 	 */
-	public function onKernelTerminate(PostResponseEvent $event)
+	public function onKernelTerminate(TerminateEvent $event)
 	{
 		if (!$this->incremented) {
 			return;
@@ -154,4 +147,35 @@ class FirewallHandler
 		$this->memcache->decrement($this->key);
 	}
 	
+	/**
+	 * Determine the client IP address. The forwarded header (X-Forwarded-For
+	 * or the configured "x_forwarded_for" header) is only used when the
+	 * request comes from one of the configured reverse proxies.
+	 *
+	 * @param Request $request The request
+	 *
+	 * @return string|null The client IP address
+	 */
+	public function getClientIp(Request $request)
+	{
+		$ip = $request->server->get('REMOTE_ADDR');
+		if (!$this->reverseProxies || !$ip || !IpUtils::checkIp($ip, $this->reverseProxies)) {
+			return $ip;
+		}
+		$header = $request->headers->get($this->xForwardedFor ?: 'X-Forwarded-For');
+		if (!$header) {
+			return $ip;
+		}
+		$ips = array_values(array_filter(array_map('trim', explode(',', $header)), function ($v) {
+			return filter_var($v, FILTER_VALIDATE_IP) !== false;
+		}));
+		// walk back from the closest hop and return the first untrusted address
+		for ($i = count($ips) - 1; $i >= 0; $i--) {
+			if (!IpUtils::checkIp($ips[$i], $this->reverseProxies)) {
+				return $ips[$i];
+			}
+		}
+		return $ips ? $ips[0] : $ip;
+	}
+
 }

@@ -7,14 +7,27 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
+use Psr\Container\ContainerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Command\Command;
 
 /**
  * Provides a command-line interface for flushing memcache content
  */
-class ClearCommand extends ContainerAwareCommand
+#[AsCommand(name: 'memcache:clear', description: 'Invalidate all Memcache items')]
+class ClearCommand extends Command
 {
+    /**
+     * @var ContainerInterface Locator for the configured pools
+     */
+    private $pools;
+
+    public function __construct(ContainerInterface $pools)
+    {
+        $this->pools = $pools;
+        parent::__construct();
+    }
+
     /**
      * @var AntiDogPileMemcache
      */
@@ -25,11 +38,9 @@ class ClearCommand extends ContainerAwareCommand
     *
     * @return void
     */
-   protected function configure()
+   protected function configure(): void
    {
       $this
-        ->setName('memcache:clear')
-        ->setDescription('Invalidate all Memcache items')
         ->setDefinition(array(
             new InputArgument('pool', InputArgument::REQUIRED, 'The pool'),
         ));
@@ -41,19 +52,24 @@ class ClearCommand extends ContainerAwareCommand
     * @param InputInterface  $input  Command input
     * @param OutputInterface $output Command output
     *
-    * @return void
+    * @return int
     */
-   protected function execute(InputInterface $input, OutputInterface $output)
+   protected function execute(InputInterface $input, OutputInterface $output): int
    {
         $pool = $input->getArgument('pool');
 
-        try {
-            $this->memcache = $this->getContainer()->get('memcache.'.$pool);
-
-            $output->writeln($this->memcache->flush()?'<info>OK</info>':'<error>ERROR</error>');
-        } catch (ServiceNotFoundException $e) {
+        if (!$this->pools->has($pool)) {
             $output->writeln("<error>pool '$pool' is not found</error>");
+            return Command::FAILURE;
         }
+        $this->memcache = $this->pools->get($pool);
+
+        if (!$this->memcache->flush()) {
+            $output->writeln('<error>ERROR</error>');
+            return Command::FAILURE;
+        }
+        $output->writeln('<info>OK</info>');
+        return Command::SUCCESS;
    }
 
    /**
@@ -63,9 +79,9 @@ class ClearCommand extends ContainerAwareCommand
     * @param OutputInterface $output Output interface
     *
     * @see Command
-    * @return mixed
+    * @return void
     */
-    protected function interact(InputInterface $input, OutputInterface $output)
+    protected function interact(InputInterface $input, OutputInterface $output): void
     {
         if (!$input->getArgument('pool')) {
             $pool = (new InteractHelper())->askForPool($this, $input, $output);

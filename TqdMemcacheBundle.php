@@ -3,8 +3,8 @@
 namespace Tqd\MemcacheBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-use Tqd\MemcacheBundle\DependencyInjection\TqdMemcacheExtension;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Tqd\MemcacheBundle\DependencyInjection\Compiler\EnableDoctrineSupport;
 use Tqd\MemcacheBundle\DependencyInjection\Compiler\EnableSessionSupport;
 
 /**
@@ -17,10 +17,11 @@ class TqdMemcacheBundle extends Bundle
     /**
      * {@inheritDoc}
      */
-    public function build(ContainerBuilder $container)
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
         $container->addCompilerPass(new EnableSessionSupport());
+        $container->addCompilerPass(new EnableDoctrineSupport());
     }
 }

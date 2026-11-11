@@ -4,6 +4,7 @@ namespace Tqd\MemcacheBundle\Cache;
 /**
  * Class to encapsulate PHP Memcache object to avoid the "Dog Pile" effect
  */
+#[\AllowDynamicProperties]
 class AntiDogPileMemcache extends LoggingMemcache
 {
     const MAX_TTL = 2592000;

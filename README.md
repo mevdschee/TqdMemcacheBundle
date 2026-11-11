@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/mevdschee/TqdMemcacheBundle.svg)](https://travis-ci.org/mevdschee/TqdMemcacheBundle)
+[![Tests](https://github.com/mevdschee/TqdMemcacheBundle/actions/workflows/tests.yml/badge.svg)](https://github.com/mevdschee/TqdMemcacheBundle/actions/workflows/tests.yml)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/mevdschee/TqdMemcacheBundle "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/mevdschee/TqdMemcacheBundle.svg)](http://isitmaintained.com/project/mevdschee/TqdMemcacheBundle "Percentage of issues still open")
 [![Total Downloads](https://img.shields.io/packagist/dt/tqdev/memcache-bundle.svg?style=flat-square)](https://packagist.org/packages/mevdschee/memcache-bundle)
@@ -20,9 +20,12 @@ It has full Web Debug Toolbar integration that allows you to analyze and debug t
 
 ### Requirements
 
-- PHP 5.3.10 or higher (PHP 7 supported)
-- php-memcache 3.0.6 or higher
+- PHP 8.1 or higher
+- Symfony 6.4 or 7.x
+- php-memcache 8.0 or higher
 - memcached 1.4 or higher
+
+Version 3.x of this bundle supports PHP 5.3 to 7.x with Symfony 2 and 3.
 
 ### Installation
 
@@ -30,17 +33,14 @@ To install TqdMemcacheBundle with Composer just run the following command:
 
     php composer.phar require tqdev/memcache-bundle
 
-Finally, add the bundle to the registerBundles function of the AppKernel class in the 'app/AppKernel.php' file:
+If you do not use Symfony Flex, add the bundle to the 'config/bundles.php' file:
 
-    public function registerBundles()
-    {
-        $bundles = array(
-            ...
-            new Tqd\MemcacheBundle\TqdMemcacheBundle(),
-            ...
-        );
+    return [
+        ...
+        Tqd\MemcacheBundle\TqdMemcacheBundle::class => ['all' => true],
+    ];
 
-Configure the bundle by adding the following to app/config/config.yml':
+Configure the bundle by adding the following to 'config/packages/tqd_memcache.yaml':
 
 ```yml
 tqd_memcache:
@@ -56,17 +56,22 @@ Install the following dependencies (on Ubuntu based systems using 'apt-get'):
 
     apt-get install memcached php-memcache
 
-NB: In PHP5 this last package was called `php5-memcache`.
-
 Do not forget to restart you web server after adding the Memcache module. Now the Memcache
 information should show up with a little double arrow (fast-forward) icon in your debug toolbar.
 
 ### Usage
 
-When you want to use the cache from the controller you can simply call:
+Every pool is available as a service named 'memcache.' followed by the pool name. You can inject it in
+your controller or service:
 
-    $this->get('memcache.default')->set('someKey', 'someValue', 0, $timeToLive);
-    $this->get('memcache.default')->get('someKey');
+    use Symfony\Component\DependencyInjection\Attribute\Autowire;
+    use Tqd\MemcacheBundle\Cache\AntiDogPileMemcache;
+
+    public function index(#[Autowire(service: 'memcache.default')] AntiDogPileMemcache $memcache)
+    {
+        $memcache->set('someKey', 'someValue', 0, $timeToLive);
+        $memcache->get('someKey');
+    }
 
 The above example shows how to store value 'someValue' under key 'someKey' for a maximum of $timeToLive
 seconds (the 0 parameter are the 'flags'). In the second line the value is retrieved from Memcache.
@@ -124,7 +129,9 @@ Note that the session locking is enabled by default and the default spin lock is
 
 ### Doctrine Support ###
 
-This bundle also provides support for Doctrine caching on Memcache servers. To enable Doctrine caching
+This bundle also provides support for Doctrine caching on Memcache servers. It requires the
+'doctrine/cache' package (```composer require doctrine/cache```) and provides PSR-6 cache pools
+as used by Doctrine ORM 2.x/3.x and DoctrineBundle 2.x/3.x. To enable Doctrine caching
 you will have to enable it through the ```doctrine``` key. Note that you can specify all three kinds of
 Doctrine caching: 'metadata', 'result' and 'query'. The required keys within those subkeys are both 
 ```pool``` (a valid pool) and ```entity_manager``` (normally: default). You can also specify a ```prefix```.
@@ -153,7 +160,8 @@ It maintains a counter of running requests per IP address and delays (throttles)
 To enable firewall support you will have to enable it through the ```firewall``` key. Note that the only
 required subkey of the firewall support is ```pool``` (a valid pool). You can also specify a key ```prefix```
 and a ```concurrency``` (default is 10). If you use one or more reverse proxies, then specify them in the
-```reverse_proxies``` key.
+```reverse_proxies``` key. The client IP address is then read from the 'X-Forwarded-For' header (or the
+header specified in the ```x_forwarded_for``` key) when the request comes from one of those proxies.
 
 ```yml
 tqd_memcache:

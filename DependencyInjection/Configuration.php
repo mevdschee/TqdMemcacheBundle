@@ -18,10 +18,10 @@ class Configuration implements ConfigurationInterface
      *
      * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('tqd_memcache');
+        $treeBuilder = new TreeBuilder('tqd_memcache');
+        $rootNode = $treeBuilder->getRootNode();
         $rootNode
             ->append($this->addSessionSupportSection())
             ->append($this->addDoctrineSection())
@@ -39,8 +39,8 @@ class Configuration implements ConfigurationInterface
      */
     private function addClientsSection()
     {
-        $tree = new TreeBuilder();
-        $node = $tree->root('pools');
+        $tree = new TreeBuilder('pools');
+        $node = $tree->getRootNode();
 
         $node
             ->requiresAtLeastOneElement()
@@ -111,8 +111,8 @@ class Configuration implements ConfigurationInterface
      */
     private function addSessionSupportSection()
     {
-        $tree = new TreeBuilder();
-        $node = $tree->root('session');
+        $tree = new TreeBuilder('session');
+        $node = $tree->getRootNode();
 
         $node
             ->children()
@@ -150,8 +150,8 @@ class Configuration implements ConfigurationInterface
      */
     private function addDoctrineSection()
     {
-        $tree = new TreeBuilder();
-        $node = $tree->root('doctrine');
+        $tree = new TreeBuilder('doctrine');
+        $node = $tree->getRootNode();
 
         foreach (array('metadata_cache', 'result_cache', 'query_cache') as $type) {
             $node->children()
@@ -191,8 +191,8 @@ class Configuration implements ConfigurationInterface
      */
     private function addFirewallSection()
     {
-    	$tree = new TreeBuilder();
-    	$node = $tree->root('firewall');
+    	$tree = new TreeBuilder('firewall');
+    	$node = $tree->getRootNode();
     
     	$node
             ->children()
@@ -237,8 +237,8 @@ class Configuration implements ConfigurationInterface
      */
     private function addMemcacheOptionsSection()
     {
-        $tree = new TreeBuilder();
-        $node = $tree->root('options');
+        $tree = new TreeBuilder('options');
+        $node = $tree->getRootNode();
 
         // Memcache only configs
         

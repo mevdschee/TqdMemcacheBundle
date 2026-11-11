@@ -1,8 +1,6 @@
 <?php
 namespace Tqd\MemcacheBundle\DataCollector;
 
-use Symfony\Component\Yaml\Yaml;
-
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -46,7 +44,7 @@ class MemcacheDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
+    public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
     {
         $empty = array('calls'=>array(),'config'=>array(),'options'=>array(),'statistics'=>array());
         $this->data = array('pools'=>$empty,'total'=>$empty);
@@ -149,7 +147,15 @@ class MemcacheDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function reset(): void
+    {
+        $this->data = array();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName(): string
     {
         return 'memcache';
     }

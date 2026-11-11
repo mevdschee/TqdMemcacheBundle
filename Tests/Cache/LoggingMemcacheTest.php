@@ -23,7 +23,8 @@ class LoggingMemcacheTest extends \PHPUnit\Framework\TestCase
 
     public function testOpenPort()
     {
-    	fsockopen('127.0.0.1', 11211, $errno, $errstr, 0.1);
+    	$socket = fsockopen('127.0.0.1', 11211, $errno, $errstr, 0.1);
+    	$this->assertNotFalse($socket, "memcached is not running on port 11211: $errstr");
     } 
 	
 	public function testGet()

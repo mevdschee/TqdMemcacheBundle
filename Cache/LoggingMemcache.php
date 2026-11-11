@@ -1,6 +1,7 @@
 <?php
 namespace Tqd\MemcacheBundle\Cache;
 
+#[\AllowDynamicProperties]
 class LoggingMemcache extends \MemcachePool implements MemcacheInterface, LoggingMemcacheInterface {
     public function __construct($logging) {
         $this->calls = array();
@@ -16,7 +17,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         $this->calls[] = (object) compact('start', 'time', 'name', 'arguments', 'result');
         return $result;
     }
-    public function setFailureCallback($failureCallback) {
+    public function setFailureCallback($failureCallback): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'setFailureCallback';
@@ -31,7 +32,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function getServerStatus($host,$port=11211) {
+    public function getServerStatus($host,$port=11211): int|bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'getServerStatus';
@@ -46,7 +47,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function getVersion() {
+    public function getVersion(): string|bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'getVersion';
@@ -60,52 +61,52 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function add($key,$var=null,$flag=0,$exptime=0) {
+    public function add($key,$var=null,$flag=0,$exptime=0,$cas=0): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'add';
-            $arguments = array($key,$var,$flag,$exptime);
+            $arguments = array($key,$var,$flag,$exptime,$cas);
         }
-        list($_key,$_var,$_flag,$_exptime) = array($key,$var,$flag,$exptime);
-        $result = parent::add($_key,$_var,$_flag,$_exptime);
-        list($key,$var,$flag,$exptime) = array($_key,$_var,$_flag,$_exptime);
+        list($_key,$_var,$_flag,$_exptime,$_cas) = array($key,$var,$flag,$exptime,$cas);
+        $result = parent::add($_key,$_var,$_flag,$_exptime,$_cas);
+        list($key,$var,$flag,$exptime,$cas) = array($_key,$_var,$_flag,$_exptime,$_cas);
         if ($this->logging) {
             $time = microtime(true) - $start;
             $this->calls[] = (object) compact('start', 'time', 'name', 'arguments', 'result');
         }
         return $result;
     }
-    public function set($key,$var=null,$flag=0,$exptime=0) {
+    public function set($key,$var=null,$flag=0,$exptime=0,$cas=0): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'set';
-            $arguments = array($key,$var,$flag,$exptime);
+            $arguments = array($key,$var,$flag,$exptime,$cas);
         }
-        list($_key,$_var,$_flag,$_exptime) = array($key,$var,$flag,$exptime);
-        $result = parent::set($_key,$_var,$_flag,$_exptime);
-        list($key,$var,$flag,$exptime) = array($_key,$_var,$_flag,$_exptime);
+        list($_key,$_var,$_flag,$_exptime,$_cas) = array($key,$var,$flag,$exptime,$cas);
+        $result = parent::set($_key,$_var,$_flag,$_exptime,$_cas);
+        list($key,$var,$flag,$exptime,$cas) = array($_key,$_var,$_flag,$_exptime,$_cas);
         if ($this->logging) {
             $time = microtime(true) - $start;
             $this->calls[] = (object) compact('start', 'time', 'name', 'arguments', 'result');
         }
         return $result;
     }
-    public function replace($key,$var=null,$flag=0,$exptime=0) {
+    public function replace($key,$var=null,$flag=0,$exptime=0,$cas=0): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'replace';
-            $arguments = array($key,$var,$flag,$exptime);
+            $arguments = array($key,$var,$flag,$exptime,$cas);
         }
-        list($_key,$_var,$_flag,$_exptime) = array($key,$var,$flag,$exptime);
-        $result = parent::replace($_key,$_var,$_flag,$_exptime);
-        list($key,$var,$flag,$exptime) = array($_key,$_var,$_flag,$_exptime);
+        list($_key,$_var,$_flag,$_exptime,$_cas) = array($key,$var,$flag,$exptime,$cas);
+        $result = parent::replace($_key,$_var,$_flag,$_exptime,$_cas);
+        list($key,$var,$flag,$exptime,$cas) = array($_key,$_var,$_flag,$_exptime,$_cas);
         if ($this->logging) {
             $time = microtime(true) - $start;
             $this->calls[] = (object) compact('start', 'time', 'name', 'arguments', 'result');
         }
         return $result;
     }
-    public function cas($key,$var=null,$flag=0,$exptime=0,$cas=0) {
+    public function cas($key,$var=null,$flag=0,$exptime=0,$cas=0): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'cas';
@@ -120,22 +121,22 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function prepend($key,$var=null,$flag=0,$exptime=0) {
+    public function prepend($key,$var=null,$flag=0,$exptime=0,$cas=0): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'prepend';
-            $arguments = array($key,$var,$flag,$exptime);
+            $arguments = array($key,$var,$flag,$exptime,$cas);
         }
-        list($_key,$_var,$_flag,$_exptime) = array($key,$var,$flag,$exptime);
-        $result = parent::prepend($_key,$_var,$_flag,$_exptime);
-        list($key,$var,$flag,$exptime) = array($_key,$_var,$_flag,$_exptime);
+        list($_key,$_var,$_flag,$_exptime,$_cas) = array($key,$var,$flag,$exptime,$cas);
+        $result = parent::prepend($_key,$_var,$_flag,$_exptime,$_cas);
+        list($key,$var,$flag,$exptime,$cas) = array($_key,$_var,$_flag,$_exptime,$_cas);
         if ($this->logging) {
             $time = microtime(true) - $start;
             $this->calls[] = (object) compact('start', 'time', 'name', 'arguments', 'result');
         }
         return $result;
     }
-    public function get($key,&$flags=null,&$cas=null) {
+    public function get($key,&$flags=null,&$cas=null): mixed {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'get';
@@ -150,7 +151,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function getStats($type='',$slabid=0,$limit=100) {
+    public function getStats($type='',$slabid=0,$limit=100): array|bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'getStats';
@@ -169,7 +170,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function getExtendedStats($type='',$slabid=0,$limit=100) {
+    public function getExtendedStats($type='',$slabid=0,$limit=100): array|bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'getExtendedStats';
@@ -188,7 +189,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function setCompressThreshold($threshold,$minSavings=0.2) {
+    public function setCompressThreshold($threshold,$minSavings=0.2): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'setCompressThreshold';
@@ -203,7 +204,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function delete($key,$exptime=0) {
+    public function delete($key,$exptime=0): array|bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'delete';
@@ -218,7 +219,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function increment($key,$value=1,$defval=0,$exptime=0) {
+    public function increment($key,$value=1,$defval=0,$exptime=0): array|int|bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'increment';
@@ -233,7 +234,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function decrement($key,$value=1,$defval=0,$exptime=0) {
+    public function decrement($key,$value=1,$defval=0,$exptime=0): array|int|bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'decrement';
@@ -248,7 +249,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function close() {
+    public function close(): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'close';
@@ -262,7 +263,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function flush($delay=0) {
+    public function flush($delay=0): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'flush';
@@ -277,7 +278,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function addServer($host,$tcpPort=11211,$udpPort=0,$persistent=true,$weight=1,$timeout=1,$retryInterval=15,$status=true) {
+    public function addServer($host,$tcpPort=11211,$udpPort=0,$persistent=true,$weight=1,$timeout=1,$retryInterval=15,$status=true): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'addServer';
@@ -292,7 +293,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function connect($host,$tcpPort=11211,$udpPort=0,$persistent=true,$weight=1,$timeout=1,$retryInterval=15) {
+    public function connect($host,$tcpPort=11211,$udpPort=0,$persistent=true,$weight=1,$timeout=1,$retryInterval=15): bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'connect';
@@ -307,7 +308,7 @@ class LoggingMemcache extends \MemcachePool implements MemcacheInterface, Loggin
         }
         return $result;
     }
-    public function findServer($key) {
+    public function findServer($key): string|bool {
         if ($this->logging) { 
             $start = microtime(true);
             $name = 'findServer';
